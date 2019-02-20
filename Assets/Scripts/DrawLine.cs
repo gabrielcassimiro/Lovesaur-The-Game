@@ -6,12 +6,16 @@ public class DrawLine : MonoBehaviour
 {
     public float UseLine = 100f;
 
+    [Range(0.01f, 10)] public float LineUsage = 0.1f;
+
     public GameObject linePrefab;
     public GameObject currentLine;
 
     public LineRenderer lineRenderer;
     public EdgeCollider2D edgeCollider;
     public List<Vector2> fingerPosition;
+
+    public int LineTotal = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,16 +28,17 @@ public class DrawLine : MonoBehaviour
         //If the left button is pressed (performed once while pressed) will create a new line;
         //Se o botão esquerdo estiver pressionado(executará uma vez enquanto estiver pressionado)
         //irá criar uma nova linha;
-        if(Input.GetMouseButtonDown(0)){
+        if(Input.GetMouseButtonDown(0) && LineTotal <= 3){
             createLine();
+            LineTotal ++;
         }
         //if left button is pressed will call the updateLine method and will pass the mouse position
         //se botao esquerdo estiver pressionado irá chamar o metodo updateLine e irá passar a posição do mouse
-        if(Input.GetMouseButton(0) && UseLine > 0){
+        if(Input.GetMouseButton(0) && UseLine > 0 && LineTotal <= 3){
             Vector2 tempFingerPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             if(Vector2.Distance(tempFingerPos, fingerPosition[fingerPosition.Count - 1]) > .1f){
                 updateLine(tempFingerPos);
-                UseLine -= 2;
+                UseLine -= LineUsage;
             }
         }
     }
