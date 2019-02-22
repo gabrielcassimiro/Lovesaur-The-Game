@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 424943890905565616}
   - component: {fileID: 4324679170598076552}
-  - component: {fileID: 4909983474161128208}
+  - component: {fileID: 8444551738358924355}
   m_Layer: 0
   m_Name: Line
   m_TagString: Untagged
@@ -126,7 +126,7 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!68 &4909983474161128208
+--- !u!68 &8444551738358924355
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

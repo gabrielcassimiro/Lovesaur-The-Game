@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class PlayerController : PhysicsObject {
 
     public float maxSpeed = 7f;
     public float jumpTakeOffSpeed = 7f;
+
+    public Animator playerAnim;
 
     protected override void ComputeVelocity () {
         // Criar uma variavel para controlar a movimentação
@@ -14,6 +17,17 @@ public class PlayerController : PhysicsObject {
         // Modificar o valor X da variavel de movimentação, para mover o jogador
         move.x = Input.GetAxis ("Horizontal");
 
+        if(move.x > 0) {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            playerAnim.Play("PlayerRun");
+        }
+        if(move.x < 0) {
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            playerAnim.Play("PlayerRun");
+        }
+        if(move.x == 0) {
+            playerAnim.Play("PlayerIdle"); 
+        }
         // Se o botão do pulo for apertado e o jogador estiver no chão
         if (Input.GetButtonDown ("Jump") && grounded) {
             // A velocidade de pulo é atribuida ao valor Y da variavel de velocidade 

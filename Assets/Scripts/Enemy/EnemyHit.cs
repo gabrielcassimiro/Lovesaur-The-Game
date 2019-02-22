@@ -29,7 +29,7 @@ public class enemyHit : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            rb2D.AddForce(x, y);
+            rb2D.AddForce(new Vector2(x, y));
             Destroy(gameObject);
         }
     }

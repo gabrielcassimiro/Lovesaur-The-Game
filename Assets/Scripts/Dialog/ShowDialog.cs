@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShowDialog : MonoBehaviour
 {
     public GameObject boxDialog;
-    public GameObject[] dialog;
+    public Text boxText;
+    public string[] dialog;
     public GameObject noticeDialog;
 
     public int pointer;
@@ -23,6 +25,11 @@ public class ShowDialog : MonoBehaviour
     void Update()
     {
         Dialog();
+        if (Input.GetKey(KeyCode.X) && pointer >= dialog.Length) {
+            boxDialog.SetActive(false);
+            canDialog = false;
+            this.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -38,27 +45,34 @@ public class ShowDialog : MonoBehaviour
     {
         if (canDialog)
         {
-            if (Input.GetKeyDown("z"))
+            if (Input.GetKeyDown(KeyCode.Z))
             {
                 noticeDialog.SetActive(false);
                 boxDialog.SetActive(true);
-                dialog[pointer].SetActive(true);
+                boxText.text = dialog[pointer];
             }
         }
     }
 
+    private void OnTriggerExit2D(Collider2D collision) {
+        noticeDialog.SetActive(false);
+        boxDialog.SetActive(false);
+        canDialog = false;
+    }
+
     private void Dialog()
     {
-        if (canDialog == true && Input.GetKeyUp("x"))
-        {
-            dialog[pointer].SetActive(false);
-            pointer++;
-
+        if (canDialog == true && Input.GetKeyDown(KeyCode.X))
+        {        
             if (pointer >= dialog.Length)
             {
                 boxDialog.SetActive(false);
-                dialog[pointer].SetActive(false);
                 canDialog = false;
+                
+            }
+            else {
+                pointer++;
+                boxText.text = dialog[pointer];
             }
         }
     }
