@@ -25,10 +25,10 @@ public class ShowDialog : MonoBehaviour
     void Update()
     {
         Dialog();
-        if (Input.GetKey(KeyCode.X) && pointer >= dialog.Length) {
+        if (Input.GetKey(KeyCode.C)) {
             boxDialog.SetActive(false);
             canDialog = false;
-            this.gameObject.SetActive(false);
+            
         }
     }
 
@@ -54,26 +54,14 @@ public class ShowDialog : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision) {
-        noticeDialog.SetActive(false);
-        boxDialog.SetActive(false);
-        canDialog = false;
-    }
+   
 
     private void Dialog()
     {
         if (canDialog == true && Input.GetKeyDown(KeyCode.X))
-        {        
-            if (pointer >= dialog.Length)
-            {
-                boxDialog.SetActive(false);
-                canDialog = false;
-                
-            }
-            else {
-                pointer++;
-                boxText.text = dialog[pointer];
-            }
+        {
+            pointer++;
+            boxText.text = dialog[pointer];
         }
     }
 }
