@@ -54,7 +54,10 @@ public class ShowDialog : MonoBehaviour
         }
     }
 
-   
+    void OnTriggerExit2D(Collider2D collision) {
+        noticeDialog.SetActive(false);
+    }
+
 
     private void Dialog()
     {
